@@ -5,7 +5,7 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-  <ion-searchbar placeholder="Recherche" showCancelButton color="danger" [(ngModel)]="query" (ionInput)="ionInput()" ></ion-searchbar>
+  <ion-searchbar placeholder="Recherche" [(ngModel)]="query" (ionInput)="ionInput()" ></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>
@@ -17,16 +17,14 @@
   <ion-item *ngIf="!(liste | async)?.length">
     Aucun résultats
   </ion-item>
-  <ion-item *ngFor="let item of liste | async">
+  <button ion-item *ngFor="let item of liste | async" (click)="push(item)">
     <ion-thumbnail item-start>
   <img [src]="'https://image.tmdb.org/t/p/w92/'+item.poster_path" alt="Affiche du film" />
     </ion-thumbnail>
     <h2>{{ item.title }}</h2>
-    <p>{{ item.release_date | date }}</p>
+    <p>{{ item.release_date | date : 'longDate' }}</p>
 
-<button ion-button clear item-end (click)="push(item)">View</button>
-
-  </ion-item>
+  </button>
 </ion-list>
 
 
