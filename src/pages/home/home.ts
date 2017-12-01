@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { DetailsPage } from '../details/details';
 
 interface Recherche {
 title : string;
@@ -15,6 +16,7 @@ const Resultats : Array<Recherche> =[];
 // ];
 
 @Component({
+
   selector: 'page-home',
   templateUrl: 'home.html'
 })
@@ -26,6 +28,11 @@ export class HomePage {
 
     console.log(this.query);
 
+  }
+  push() {
+
+    console.log("view");
+    this.navCtrl.push(DetailsPage);
   }
   constructor(public navCtrl: NavController) {
 

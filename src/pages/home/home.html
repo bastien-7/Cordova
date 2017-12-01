@@ -23,7 +23,9 @@
     </ion-thumbnail>
     <h2>{{ item.title }}</h2>
     <p>{{ item.author }}</p>
-    <button ion-button clear item-end>View</button>
+
+<button ion-button block (click)="push()">View</button>
+
   </ion-item>
 </ion-list>
 
