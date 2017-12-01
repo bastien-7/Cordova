@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DetailsPage } from '../details/details';
 
-interface Recherche {
+export interface Recherche {
 title : string;
 author : string;
 date : string;
 image : string;
 }
 
-const Resultats : Array<Recherche> =[];
-//  =[{ title: "Titre", author: "author", date: "date", image: "http://www.lorempixel.com/400/200" },
-// { title: "Titre2", author: "author2", date: "date2", image: "http://www.lorempixel.com/400/200" },
-// { title: "Titre3", author: "author3", date: "date3", image: "http://www.lorempixel.com/400/200" }
-// ];
+const Resultats : Array<Recherche>
+ =[{ title: "Titre", author: "author", date: "date", image: "http://www.lorempixel.com/400/200" },
+{ title: "Titre2", author: "author2", date: "date2", image: "http://www.lorempixel.com/400/200" },
+{ title: "Titre3", author: "author3", date: "date3", image: "http://www.lorempixel.com/400/200" }
+];
 
 @Component({
 
@@ -29,13 +29,14 @@ export class HomePage {
     console.log(this.query);
 
   }
-  push() {
+  push(item:Recherche) {
 
     console.log("view");
-    this.navCtrl.push(DetailsPage);
+    this.navCtrl.push(DetailsPage,{item:item});
   }
   constructor(public navCtrl: NavController) {
 
   }
+
 
 }

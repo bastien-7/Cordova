@@ -7,13 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>details</ion-title>
+    <ion-title>{{movie.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  Page détail
+  <p>Réalisé par {{movie.author}}, {{movie.date}} </p>
+
+<p>
+<img src={{movie.image}} alt="Affiche du film" />
+</p>
 
 </ion-content>
