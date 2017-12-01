@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DetailsPage } from '../details/details';
+import { api_key } from "../../app/tmdb";
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 export interface Recherche {
 title : string;
-author : string;
-date : string;
-image : string;
+overview : string;
+release_date : string;
+poster_path : string;
+backdrop_path : string;
 }
 
-const Resultats : Array<Recherche>
- =[{ title: "Titre", author: "author", date: "date", image: "http://www.lorempixel.com/400/200" },
-{ title: "Titre2", author: "author2", date: "date2", image: "http://www.lorempixel.com/400/200" },
-{ title: "Titre3", author: "author3", date: "date3", image: "http://www.lorempixel.com/400/200" }
-];
 
 @Component({
 
@@ -22,20 +22,45 @@ const Resultats : Array<Recherche>
 })
 export class HomePage {
 
-  liste: Recherche[] = Resultats;
+  liste: Observable<Recherche[]>;
   query :string = "";
+  lang : string = "fr-FR";
+
+
+  lien: string = "https://api.themoviedb.org/3/search/movie";
+
+
+
+
+  // results: HttpParams;
+
+  fetchResults ():Observable<Recherche[]>{
+
+
+    return this.http.get<Recherche[]>(this.lien,{
+      params : new HttpParams().set("api_key",api_key).set("query",this.query).set("language",this.lang)
+    }).pluck('results');
+
+
+  }
+
   ionInput():void{
 
-    console.log(this.query);
+    if(this.query) {
+      this.liste=this.fetchResults();
 
+    }else{
+      this.liste=Observable.of([]);
+
+    }
   }
   push(item:Recherche) {
 
     console.log("view");
     this.navCtrl.push(DetailsPage,{item:item});
   }
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, private http : HttpClient) {
+  this.ionInput();
   }
 
 

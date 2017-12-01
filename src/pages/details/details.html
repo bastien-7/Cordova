@@ -14,10 +14,18 @@
 
 
 <ion-content padding>
-  <p>Réalisé par {{movie.author}}, {{movie.date}} </p>
+<p>
+  Date de sortie : {{movie.release_date | date}}
+</p>
+
+
+
+   <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path" alt="Affiche du film" />
+
 
 <p>
-<img src={{movie.image}} alt="Affiche du film" />
+  {{movie.overview}}
 </p>
+  <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" alt="Affiche du film" />
 
 </ion-content>

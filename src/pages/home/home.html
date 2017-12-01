@@ -14,15 +14,15 @@
 
 
 <ion-list>
-  <ion-item *ngIf=!liste.length>
+  <ion-item *ngIf="!(liste | async)?.length">
     Aucun résultats
   </ion-item>
-  <ion-item *ngFor="let item of liste">
+  <ion-item *ngFor="let item of liste | async">
     <ion-thumbnail item-start>
-      <img src="item.image">
+  <img [src]="'https://image.tmdb.org/t/p/w92/'+item.poster_path" alt="Affiche du film" />
     </ion-thumbnail>
     <h2>{{ item.title }}</h2>
-    <p>{{ item.author }}</p>
+    <p>{{ item.release_date | date }}</p>
 
 <button ion-button clear item-end (click)="push(item)">View</button>
 
